@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.OrderDao">
+
+<select id="getOrder" resultType="order">
+    select * from t_order where member_id=#{member_id} and orderDate=#{orderDate} and setmeal_id=#{setmeal_id}
+</select>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order(
+        member_Id,
+        orderDate,
+        orderType,
+        orderStatus,
+        setmeal_Id
+        ) values (
+            #{memberId},
+            #{orderDate},
+            #{orderType},
+            #{orderStatus},
+            #{setmealId}
+        )
+
+
+    </insert>
+
+    <select id="findById" resultType="map">
+    select member.name member,setmeal.name setmeal,order1.orderDate orderDate,orderType orderType
+    from
+    t_member member,t_order order1,t_setmeal setmeal
+    where
+    member.id=order1.member_id
+    and
+    setmeal.id=order1.setmeal_id
+    and
+    order1.id=#{id}
+    </select>
+    <select id="getTodayOrderNumber" resultType="order">
+
+    </select>
+    <select id="getTodayVisitsNumber" resultType="order">
+
+    </select>
+    <select id="getThisWeekAndMonthOrderNumber" resultType="order">
+
+    </select>
+    <select id="getThisWeekAndMonthVisitsNumber" resultType="order">
+
+    </select>
+    <select id="findHotSetmeal" resultType="order">
+
+    </select>
+</mapper>
